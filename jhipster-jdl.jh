@@ -1,0 +1,42 @@
+entity ProductGroup {
+	name String required
+}
+
+entity Category {
+	name String required
+}
+
+entity Brand {
+	name String required
+}
+
+entity ProductImage {
+	photo ImageBlob required,
+    active Boolean
+}
+
+entity Product {
+	name String required,
+    description String required,
+    weight BigDecimal required,
+    listPrice BigDecimal required,
+    salePrice BigDecimal required,
+    active Boolean
+}
+
+relationship ManyToOne {
+	Product{group} to ProductGroup
+    ProductImage{product} to Product
+    Product{category} to Category
+}
+
+relationship ManyToOne {
+	Product{brand} to Brand
+}
+
+// Set pagination options
+paginate Product with infinite-scroll
+dto * with mapstruct
+// Set service options to all except few
+service all with serviceImpl
+

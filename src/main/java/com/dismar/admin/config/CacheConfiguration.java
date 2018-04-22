@@ -45,6 +45,11 @@ public class CacheConfiguration {
             cm.createCache(com.dismar.admin.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.dismar.admin.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.dismar.admin.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.dismar.admin.domain.ProductGroup.class.getName(), jcacheConfiguration);
+            cm.createCache(com.dismar.admin.domain.Category.class.getName(), jcacheConfiguration);
+            cm.createCache(com.dismar.admin.domain.Brand.class.getName(), jcacheConfiguration);
+            cm.createCache(com.dismar.admin.domain.ProductImage.class.getName(), jcacheConfiguration);
+            cm.createCache(com.dismar.admin.domain.Product.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

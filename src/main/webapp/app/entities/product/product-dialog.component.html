@@ -1,0 +1,118 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProductLabel">Create or edit a Product</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!product.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="product.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="product.name" required/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                [(ngModel)]="product.description" required/>
+            <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.description?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_weight">Weight</label>
+            <input type="number" class="form-control" name="weight" id="field_weight"
+                [(ngModel)]="product.weight" required/>
+            <div [hidden]="!(editForm.controls.weight?.dirty && editForm.controls.weight?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.weight?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.weight?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_listPrice">List Price</label>
+            <input type="number" class="form-control" name="listPrice" id="field_listPrice"
+                [(ngModel)]="product.listPrice" required/>
+            <div [hidden]="!(editForm.controls.listPrice?.dirty && editForm.controls.listPrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.listPrice?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.listPrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_salePrice">Sale Price</label>
+            <input type="number" class="form-control" name="salePrice" id="field_salePrice"
+                [(ngModel)]="product.salePrice" required/>
+            <div [hidden]="!(editForm.controls.salePrice?.dirty && editForm.controls.salePrice?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.salePrice?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.salePrice?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_active">Active</label>
+            <input type="checkbox" class="form-control" name="active" id="field_active"
+                [(ngModel)]="product.active" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_group">Group</label>
+            <select class="form-control" id="field_group" name="group" [(ngModel)]="product.groupId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="productGroupOption.id" *ngFor="let productGroupOption of productgroups; trackBy: trackProductGroupById">{{productGroupOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_category">Category</label>
+            <select class="form-control" id="field_category" name="category" [(ngModel)]="product.categoryId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="categoryOption.id" *ngFor="let categoryOption of categories; trackBy: trackCategoryById">{{categoryOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_brand">Brand</label>
+            <select class="form-control" id="field_brand" name="brand" [(ngModel)]="product.brandId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="brandOption.id" *ngFor="let brandOption of brands; trackBy: trackBrandById">{{brandOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
